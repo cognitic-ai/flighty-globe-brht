@@ -31,7 +31,7 @@ export default function GlobeMap() {
       <MapView
         style={{ flex: 1 }}
         provider={PROVIDER_DEFAULT}
-        mapType="mutedStandard"
+        mapType="hybridFlyover"
         camera={{
           center: { latitude: 30, longitude: -50 },
           pitch: 0,

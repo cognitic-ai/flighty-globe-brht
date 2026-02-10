@@ -16,8 +16,10 @@ export default function Layout() {
           options={{
             presentation: "formSheet",
             sheetGrabberVisible: false,
-            sheetAllowedDetents: [0.45, 1.0],
+            sheetAllowedDetents: [0.15, 0.45, 1.0],
             sheetCornerRadius: 20,
+            sheetExpandsWhenScrolledToEdge: false,
+            gestureEnabled: false,
             headerShown: true,
             headerTransparent: true,
             title: "",
