@@ -6,34 +6,43 @@ const PROFILE_IMAGE = "https://github.com/evanbacon.png";
 
 function ProfileHeader() {
   return (
-    <View style={{ alignItems: "center", gap: 10, paddingTop: 8 }}>
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 12,
+        paddingTop: 8,
+        paddingHorizontal: 20,
+      }}
+    >
       <Image
         source={{ uri: PROFILE_IMAGE }}
         style={{
-          width: 64,
-          height: 64,
-          borderRadius: 32,
+          width: 48,
+          height: 48,
+          borderRadius: 24,
           borderCurve: "continuous",
         }}
       />
-      <Text
-        style={{
-          fontSize: 17,
-          fontWeight: "600",
-          color: AC.label,
-        }}
-      >
-        Evan Bacon
-      </Text>
-      <Text
-        style={{
-          fontSize: 13,
-          color: AC.secondaryLabel,
-          marginTop: -6,
-        }}
-      >
-        In Flight · United Airlines
-      </Text>
+      <View style={{ gap: 2 }}>
+        <Text
+          style={{
+            fontSize: 17,
+            fontWeight: "600",
+            color: AC.label,
+          }}
+        >
+          Evan Bacon
+        </Text>
+        <Text
+          style={{
+            fontSize: 13,
+            color: AC.secondaryLabel,
+          }}
+        >
+          In Flight · United Airlines
+        </Text>
+      </View>
     </View>
   );
 }

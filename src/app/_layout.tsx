@@ -15,8 +15,8 @@ export default function Layout() {
           name="flight-info"
           options={{
             presentation: "formSheet",
-            sheetGrabberVisible: true,
-            sheetAllowedDetents: [0.45, 0.85],
+            sheetGrabberVisible: false,
+            sheetAllowedDetents: [0.45, 1.0],
             sheetCornerRadius: 20,
             headerShown: true,
             headerTransparent: true,
