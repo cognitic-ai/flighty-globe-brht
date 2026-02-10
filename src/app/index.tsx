@@ -1,15 +1,20 @@
-import { ScrollView, Text } from "react-native";
+import { useEffect } from "react";
+import { View } from "react-native";
+import { router } from "expo-router";
+import GlobeMap from "@/components/globe-map";
 
 export default function IndexRoute() {
+  useEffect(() => {
+    // Auto-present the flight info sheet on load
+    const timer = setTimeout(() => {
+      router.push("/flight-info");
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={{
-        padding: 16,
-        backgroundColor: "white",
-      }}
-    >
-      <Text>Hello world</Text>
-    </ScrollView>
+    <View style={{ flex: 1 }}>
+      <GlobeMap />
+    </View>
   );
 }
