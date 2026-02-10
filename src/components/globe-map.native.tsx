@@ -17,7 +17,6 @@ function getArcPoints(
     const t = i / numPoints;
     const lat = start.latitude + t * (end.latitude - start.latitude);
     const lng = start.longitude + t * (end.longitude - start.longitude);
-    // Add arc curvature
     const arc = Math.sin(t * Math.PI) * 8;
     points.push({ latitude: lat + arc, longitude: lng });
   }
@@ -26,9 +25,6 @@ function getArcPoints(
 
 const arcPoints = getArcPoints(FLIGHT.from, FLIGHT.to);
 
-// Position for the airplane (midpoint of arc)
-const planePosition = arcPoints[Math.floor(arcPoints.length * 0.55)];
-
 export default function GlobeMap() {
   return (
     <View style={{ flex: 1 }}>
@@ -36,14 +32,17 @@ export default function GlobeMap() {
         style={{ flex: 1 }}
         provider={PROVIDER_DEFAULT}
         mapType="mutedStandard"
-        initialRegion={{
-          latitude: 39.5,
-          longitude: -98.0,
-          latitudeDelta: 60,
-          longitudeDelta: 60,
+        camera={{
+          center: { latitude: 30, longitude: -50 },
+          pitch: 0,
+          heading: 0,
+          altitude: 20000000,
+          zoom: 1,
         }}
-        rotateEnabled={false}
-        pitchEnabled={false}
+        rotateEnabled
+        pitchEnabled
+        zoomEnabled
+        scrollEnabled
         showsUserLocation={false}
         showsCompass={false}
         showsScale={false}

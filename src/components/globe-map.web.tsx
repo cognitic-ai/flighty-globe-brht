@@ -43,7 +43,7 @@ export default function GlobeMap() {
     const map = L.map(mapRef.current, {
       zoomControl: false,
       attributionControl: false,
-    }).setView([39.5, -98.0], 3);
+    }).setView([20, -30], 2);
 
     const isDark = colorScheme === "dark";
     const tileUrl = isDark
