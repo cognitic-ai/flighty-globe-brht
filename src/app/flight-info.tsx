@@ -131,9 +131,7 @@ function FlightHeader() {
         >
           JFK
         </Text>
-        <Text style={{ fontSize: 13, color: AC.secondaryLabel }}>
-          New York
-        </Text>
+        <Text style={{ fontSize: 13, color: AC.secondaryLabel }}>New York</Text>
       </View>
     </View>
   );
@@ -354,10 +352,12 @@ export default function FlightInfoSheet() {
   return (
     <ScrollView
       style={{ flex: 1 }}
+      contentInsetAdjustmentBehavior="automatic"
+      automaticallyAdjustContentInsets
       contentContainerStyle={{ paddingBottom: 40 }}
       showsVerticalScrollIndicator={false}
     >
-      <ProfileHeader />
+      {/* <ProfileHeader /> */}
       <FlightHeader />
       <FlightProgressBar />
       <FlightDetails />

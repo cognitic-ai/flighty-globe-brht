@@ -17,6 +17,8 @@
       "expo-router",
       "expo-web-browser",
       "@bacons/apple-colors"
-    ]
+    ],
+    "name": "Flighty Globe",
+    "owner": "bacon"
   }
 }
