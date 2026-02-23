@@ -52,21 +52,29 @@ export default function GlobeMap() {
         showsPointsOfInterest={false}
         userInterfaceStyle="dark"
       >
+        {/* Glow layer */}
         <Polyline
           coordinates={arcPoints}
-          strokeColor={String(AC.systemBlue)}
-          strokeWidth={3}
+          strokeColor="rgba(0, 200, 255, 0.25)"
+          strokeWidth={14}
+          lineDashPattern={[0]}
+        />
+        {/* Bright line */}
+        <Polyline
+          coordinates={arcPoints}
+          strokeColor="#00C8FF"
+          strokeWidth={4}
           lineDashPattern={[0]}
         />
         <Marker
           coordinate={FLIGHT.from}
           title="SFO"
-          pinColor={String(AC.systemBlue)}
+          pinColor="#00C8FF"
         />
         <Marker
           coordinate={FLIGHT.to}
           title="JFK"
-          pinColor={String(AC.systemOrange)}
+          pinColor="#00C8FF"
         />
       </MapView>
     </View>

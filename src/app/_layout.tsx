@@ -20,6 +20,8 @@ export default function Layout() {
             sheetAllowedDetents: [0.33, 0.55, 1.0],
             title: "",
             headerSearchBarOptions: {},
+            sheetLargestUndimmedDetentIndex: 1,
+               swipeToDismiss: false, 
           }}
         >
           <Stack.Header

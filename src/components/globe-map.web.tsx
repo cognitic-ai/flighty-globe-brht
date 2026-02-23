@@ -53,22 +53,29 @@ export default function GlobeMap() {
     L.tileLayer(tileUrl).addTo(map);
 
     const arcPoints = getArcPoints(FLIGHT.from, FLIGHT.to);
+    // Glow layer
     L.polyline(arcPoints, {
-      color: "#007AFF",
-      weight: 3,
-      opacity: 0.8,
+      color: "#00C8FF",
+      weight: 16,
+      opacity: 0.2,
+    }).addTo(map);
+    // Bright line
+    L.polyline(arcPoints, {
+      color: "#00C8FF",
+      weight: 4,
+      opacity: 1,
     }).addTo(map);
 
     const dotIcon = L.divIcon({
       className: "",
-      html: '<div style="width:12px;height:12px;border-radius:50%;background:#007AFF;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>',
+      html: '<div style="width:12px;height:12px;border-radius:50%;background:#00C8FF;border:2px solid white;box-shadow:0 0 8px rgba(0,200,255,0.8)"></div>',
       iconSize: [12, 12],
       iconAnchor: [6, 6],
     });
 
     const dotIcon2 = L.divIcon({
       className: "",
-      html: '<div style="width:12px;height:12px;border-radius:50%;background:#FF9500;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>',
+      html: '<div style="width:12px;height:12px;border-radius:50%;background:#00C8FF;border:2px solid white;box-shadow:0 0 8px rgba(0,200,255,0.8)"></div>',
       iconSize: [12, 12],
       iconAnchor: [6, 6],
     });
