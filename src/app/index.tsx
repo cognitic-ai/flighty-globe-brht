@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { View, Pressable } from "react-native";
 import { router, Stack } from "expo-router";
+import { Image} from 'expo-image';
 import * as AC from "@bacons/apple-colors";
 import { GlassView, isLiquidGlassAvailable } from "expo-glass-effect";
 import { SFSymbol } from "@/components/sf-symbol";
