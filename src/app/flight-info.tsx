@@ -53,7 +53,7 @@ function ProfileHeader() {
           width: 30,
           height: 30,
           borderRadius: 15,
-          backgroundColor: String(AC.tertiarySystemFill),
+          backgroundColor: AC.tertiarySystemFill as any,
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -94,8 +94,8 @@ function ActionPill({ icon, label }: { icon: string; label: string }) {
         borderRadius: 20,
         borderCurve: "continuous",
         backgroundColor: pressed
-          ? String(AC.quaternarySystemFill)
-          : String(AC.tertiarySystemFill),
+          ? AC.quaternarySystemFill as any
+          : AC.tertiarySystemFill as any,
       })}
     >
       {inner}
@@ -151,7 +151,7 @@ function YearSelector() {
                 letterSpacing: active ? 0.2 : 0,
                 color: active
                   ? isDark ? "#000" : "#fff"
-                  : String(AC.secondaryLabel),
+                  : AC.secondaryLabel as any,
               }}
             >
               {year === "all" ? "ALL-TIME" : String(year)}
@@ -335,7 +335,7 @@ function FlightRow({ flight }: { flight: Flight }) {
         paddingVertical: 12,
         paddingHorizontal: 16,
         backgroundColor: pressed
-          ? String(AC.tertiarySystemFill)
+          ? AC.tertiarySystemFill as any
           : isSelected
           ? "rgba(0, 122, 255, 0.08)"
           : "transparent",
@@ -363,7 +363,7 @@ function FlightRow({ flight }: { flight: Flight }) {
         </Text>
       </View>
       <View style={{ alignItems: "flex-end", gap: 3 }}>
-        <Text style={{ fontSize: 14, fontWeight: "600", color: isSelected ? "#00C8FF" : String(AC.label), fontVariant: ["tabular-nums"] }}>
+        <Text style={{ fontSize: 14, fontWeight: "600", color: isSelected ? "#00C8FF" : AC.label as any, fontVariant: ["tabular-nums"] }}>
           {flight.miles.toLocaleString()} mi
         </Text>
         <Text style={{ fontSize: 12, color: AC.secondaryLabel, fontVariant: ["tabular-nums"] }}>
@@ -378,7 +378,7 @@ function FlightRow({ flight }: { flight: Flight }) {
 
 function Divider() {
   return (
-    <View style={{ height: 0.5, backgroundColor: String(AC.separator), marginLeft: 16 }} />
+    <View style={{ height: 0.5, backgroundColor: AC.separator as any, marginLeft: 16 }} />
   );
 }
 
@@ -400,12 +400,12 @@ function FlightList() {
       >
         Flights
       </Text>
-      <Animated.View
-        layout={LinearTransition}
+      {/* Regular View owns the PlatformColor background — Animated.View cannot resolve PlatformColor */}
+      <View
         style={{
-          backgroundColor: String(AC.secondarySystemGroupedBackground),
+          backgroundColor: AC.secondarySystemGroupedBackground as any,
           borderRadius: 12,
-          borderCurve: "continuous",
+          borderCurve: "continuous" as any,
           marginHorizontal: 12,
           overflow: "hidden",
         }}
@@ -421,7 +421,7 @@ function FlightList() {
             <FlightRow flight={flight} />
           </Animated.View>
         ))}
-      </Animated.View>
+      </View>
     </View>
   );
 }
