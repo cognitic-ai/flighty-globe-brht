@@ -16,6 +16,7 @@ import Animated, {
   LinearTransition,
 } from "react-native-reanimated";
 import { GlassView, isLiquidGlassAvailable } from "expo-glass-effect";
+import { SFSymbol } from "@/components/sf-symbol";
 import { useFlightStore } from "@/store/flight-context";
 import { type Flight, type YearKey } from "@/data/flights";
 
@@ -58,7 +59,7 @@ function ProfileHeader() {
           justifyContent: "center",
         }}
       >
-        <Image source="sf:xmark" style={{ width: 12, height: 12, tintColor: AC.secondaryLabel }} />
+        <SFSymbol source="sf:xmark" style={{ width: 12, height: 12, tintColor: AC.secondaryLabel }} />
       </View>
     </View>
   );
@@ -71,7 +72,7 @@ function ActionPill({ icon, label }: { icon: string; label: string }) {
     <View
       style={{ flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 14, paddingVertical: 9 }}
     >
-      <Image source={icon} style={{ width: 14, height: 14, tintColor: AC.label }} />
+      <SFSymbol source={icon} style={{ width: 14, height: 14, tintColor: AC.label }} />
       <Text style={{ fontSize: 14, fontWeight: "600", color: AC.label }}>{label}</Text>
     </View>
   );
@@ -200,7 +201,7 @@ function PassportCard() {
           </Text>
         </View>
         <Pressable onPress={handleShare} hitSlop={8}>
-          <Image source="sf:square.and.arrow.up" style={{ width: 16, height: 16, tintColor: "rgba(255,255,255,0.6)" }} />
+          <SFSymbol source="sf:square.and.arrow.up" style={{ width: 16, height: 16, tintColor: "rgba(255,255,255,0.6)" }} />
         </Pressable>
       </View>
 
@@ -270,7 +271,7 @@ function PassportCard() {
         })}
       >
         <Text style={{ fontSize: 15, fontWeight: "600", color: "white" }}>All Flight Stats</Text>
-        <Image source="sf:chevron.right" style={{ width: 12, height: 14, tintColor: "rgba(255,255,255,0.6)" }} />
+        <SFSymbol source="sf:chevron.right" style={{ width: 12, height: 14, tintColor: "rgba(255,255,255,0.6)" }} />
       </Pressable>
     </View>
   );
@@ -312,7 +313,7 @@ function DelaysCard() {
         </Text>
       </View>
       <Pressable onPress={handleShare} hitSlop={8}>
-        <Image source="sf:square.and.arrow.up" style={{ width: 16, height: 16, tintColor: "rgba(255,255,255,0.5)", marginBottom: 4 }} />
+        <SFSymbol source="sf:square.and.arrow.up" style={{ width: 16, height: 16, tintColor: "rgba(255,255,255,0.5)", marginBottom: 4 }} />
       </Pressable>
     </View>
   );
@@ -348,7 +349,7 @@ function FlightRow({ flight }: { flight: Flight }) {
           <Text style={{ fontSize: 16, fontWeight: "700", color: AC.label }}>
             {flight.from.code}
           </Text>
-          <Image source="sf:arrow.right" style={{ width: 10, height: 10, tintColor: AC.tertiaryLabel }} />
+          <SFSymbol source="sf:arrow.right" style={{ width: 10, height: 10, tintColor: AC.tertiaryLabel }} />
           <Text style={{ fontSize: 16, fontWeight: "700", color: AC.label }}>
             {flight.to.code}
           </Text>

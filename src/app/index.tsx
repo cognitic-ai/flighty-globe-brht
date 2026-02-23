@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { View, Pressable } from "react-native";
 import { router, Stack } from "expo-router";
-import { Image } from "expo-image";
 import * as AC from "@bacons/apple-colors";
 import { GlassView, isLiquidGlassAvailable } from "expo-glass-effect";
+import { SFSymbol } from "@/components/sf-symbol";
 import GlobeMap from "@/components/globe-map";
 import { useFlightStore } from "@/store/flight-context";
 
@@ -21,7 +21,7 @@ function MapToggleButton() {
           isInteractive
           style={{ width: 36, height: 36, borderRadius: 18, alignItems: "center", justifyContent: "center" }}
         >
-          <Image source={icon} style={{ width: 18, height: 18, tintColor: AC.label }} />
+          <SFSymbol source={icon} style={{ width: 18, height: 18, tintColor: AC.label }} />
         </GlassView>
       ) : (
         <View
