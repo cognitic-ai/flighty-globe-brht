@@ -25,6 +25,7 @@
         "expo-system-ui": "~55.0.2",
         "expo-web-browser": "~55.0.2",
         "leaflet": "^1.9.4",
+        "number-flow-react-native": "^0.2.4",
         "react": "19.2.0",
         "react-dom": "19.2.0",
         "react-native": "0.83.1",
@@ -949,6 +950,8 @@
     "npm-package-arg": ["npm-package-arg@11.0.3", "", { "dependencies": { "hosted-git-info": "^7.0.0", "proc-log": "^4.0.0", "semver": "^7.3.5", "validate-npm-package-name": "^5.0.0" } }, "sha512-sHGJy8sOC1YraBywpzQlIKBE4pBbGbiF95U6Auspzyem956E0+FtDtsx1ZxlOJkQCZ1AFXAY/yuvtFYrOxF+Bw=="],
 
     "nullthrows": ["nullthrows@1.1.1", "", {}, "sha512-2vPPEi+Z7WqML2jZYddDIfy5Dqb0r2fze2zTxNNknZaFpVHU3mFB3R+DWeJWGVx0ecvttSGlJTI+WG+8Z4cDWw=="],
+
+    "number-flow-react-native": ["number-flow-react-native@0.2.4", "", { "peerDependencies": { "react": ">=18", "react-native": ">=0.73", "react-native-reanimated": ">=3.0.0" } }, "sha512-3jDkq8dpRYy/VEaEuxgtDLXe/UBjOxiJOAhjD3+R84t0D5p4dObp7cO5Al1fvn8T6WhWQ5PiQ2M4B6qi1EgNPA=="],
 
     "ob1": ["ob1@0.83.3", "", { "dependencies": { "flow-enums-runtime": "^0.0.6" } }, "sha512-egUxXCDwoWG06NGCS5s5AdcpnumHKJlfd3HH06P3m9TEMwwScfcY35wpQxbm9oHof+dM/lVH9Rfyu1elTVelSA=="],
 

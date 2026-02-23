@@ -1,44 +1,74 @@
+import { useEffect, useRef } from "react";
 import MapView, { Marker, Polyline, PROVIDER_DEFAULT } from "react-native-maps";
 import { View } from "react-native";
-import * as AC from "@bacons/apple-colors";
+import { useFlightStore } from "@/store/flight-context";
+import { ALL_FLIGHTS, getArcPoints, getCameraForFlight, type Flight } from "@/data/flights";
 
-const FLIGHT = {
-  from: { latitude: 37.6213, longitude: -122.379, name: "SFO" },
-  to: { latitude: 40.6413, longitude: -73.7781, name: "JFK" },
+const DOT = {
+  width: 10,
+  height: 10,
+  borderRadius: 5,
+  borderWidth: 2,
+  borderColor: "white",
 };
 
-function getArcPoints(
-  start: { latitude: number; longitude: number },
-  end: { latitude: number; longitude: number },
-  numPoints = 100
-) {
-  const points = [];
-  for (let i = 0; i <= numPoints; i++) {
-    const t = i / numPoints;
-    const lat = start.latitude + t * (end.latitude - start.latitude);
-    const lng = start.longitude + t * (end.longitude - start.longitude);
-    const arc = Math.sin(t * Math.PI) * 8;
-    points.push({ latitude: lat + arc, longitude: lng });
-  }
-  return points;
+function FlightRoute({ flight, active }: { flight: Flight; active: boolean }) {
+  const arc = getArcPoints(flight.from, flight.to);
+  const glow = active ? "rgba(0, 200, 255, 0.28)" : "rgba(255,255,255,0.08)";
+  const line = active ? "#00C8FF" : "rgba(255,255,255,0.45)";
+  const glowWidth = active ? 14 : 8;
+  const lineWidth = active ? 4 : 2;
+
+  return (
+    <>
+      <Polyline coordinates={arc} strokeColor={glow} strokeWidth={glowWidth} lineDashPattern={[0]} />
+      <Polyline coordinates={arc} strokeColor={line} strokeWidth={lineWidth} lineDashPattern={[0]} />
+      <Marker coordinate={flight.from} anchor={{ x: 0.5, y: 0.5 }}>
+        <View style={{ ...DOT, backgroundColor: line, boxShadow: active ? "0 0 6px rgba(0,200,255,0.9)" : "none" }} />
+      </Marker>
+      <Marker coordinate={flight.to} anchor={{ x: 0.5, y: 0.5 }}>
+        <View style={{ ...DOT, backgroundColor: line, boxShadow: active ? "0 0 6px rgba(0,200,255,0.9)" : "none" }} />
+      </Marker>
+    </>
+  );
 }
 
-const arcPoints = getArcPoints(FLIGHT.from, FLIGHT.to);
+const GLOBE_CAMERA = { center: { latitude: 30, longitude: -50 }, altitude: 20_000_000, pitch: 0, heading: 0 };
 
 export default function GlobeMap() {
+  const mapRef = useRef<MapView>(null);
+  const { visibleFlights, selectedFlightId, mapIs3D } = useFlightStore();
+  // Track the previous selectedFlightId so year changes (which reset to null) only
+  // trigger a camera reset when a flight was actually selected before, not on every
+  // visibleFlights change.
+  const prevFlightIdRef = useRef<string | null>(undefined as any);
+
+  useEffect(() => {
+    const prev = prevFlightIdRef.current;
+    prevFlightIdRef.current = selectedFlightId;
+
+    // Skip the very first render (initial undefined → null transition)
+    if (prev === undefined) return;
+    if (!mapRef.current) return;
+
+    if (selectedFlightId !== null) {
+      const flight = ALL_FLIGHTS.find((f) => f.id === selectedFlightId);
+      if (flight) mapRef.current.animateCamera(getCameraForFlight(flight), { duration: 900 });
+    } else if (prev !== null) {
+      // Only reset to globe if we actually had a selection before
+      mapRef.current.animateCamera(GLOBE_CAMERA, { duration: 900 });
+    }
+    // prev === null && selectedFlightId === null → year tab change, no animation
+  }, [selectedFlightId]);
+
   return (
     <View style={{ flex: 1 }}>
       <MapView
+        ref={mapRef}
         style={{ flex: 1 }}
         provider={PROVIDER_DEFAULT}
-        mapType="hybridFlyover"
-        camera={{
-          center: { latitude: 30, longitude: -50 },
-          pitch: 0,
-          heading: 0,
-          altitude: 20000000,
-          zoom: 1,
-        }}
+        mapType={mapIs3D ? "hybridFlyover" : "mutedStandard"}
+        camera={GLOBE_CAMERA}
         rotateEnabled
         pitchEnabled
         zoomEnabled
@@ -52,46 +82,13 @@ export default function GlobeMap() {
         showsPointsOfInterest={false}
         userInterfaceStyle="dark"
       >
-        {/* Glow layer */}
-        <Polyline
-          coordinates={arcPoints}
-          strokeColor="rgba(0, 200, 255, 0.25)"
-          strokeWidth={14}
-          lineDashPattern={[0]}
-        />
-        {/* Bright line */}
-        <Polyline
-          coordinates={arcPoints}
-          strokeColor="#00C8FF"
-          strokeWidth={4}
-          lineDashPattern={[0]}
-        />
-        <Marker coordinate={FLIGHT.from} anchor={{ x: 0.5, y: 0.5 }}>
-          <View
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: 6,
-              backgroundColor: "#00C8FF",
-              borderWidth: 2,
-              borderColor: "white",
-              boxShadow: "0 0 8px rgba(0, 200, 255, 0.9)",
-            }}
+        {visibleFlights.map((flight) => (
+          <FlightRoute
+            key={flight.id}
+            flight={flight}
+            active={selectedFlightId === null || selectedFlightId === flight.id}
           />
-        </Marker>
-        <Marker coordinate={FLIGHT.to} anchor={{ x: 0.5, y: 0.5 }}>
-          <View
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: 6,
-              backgroundColor: "#00C8FF",
-              borderWidth: 2,
-              borderColor: "white",
-              boxShadow: "0 0 8px rgba(0, 200, 255, 0.9)",
-            }}
-          />
-        </Marker>
+        ))}
       </MapView>
     </View>
   );
