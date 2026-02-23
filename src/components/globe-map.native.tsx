@@ -66,16 +66,32 @@ export default function GlobeMap() {
           strokeWidth={4}
           lineDashPattern={[0]}
         />
-        <Marker
-          coordinate={FLIGHT.from}
-          title="SFO"
-          pinColor="#00C8FF"
-        />
-        <Marker
-          coordinate={FLIGHT.to}
-          title="JFK"
-          pinColor="#00C8FF"
-        />
+        <Marker coordinate={FLIGHT.from} anchor={{ x: 0.5, y: 0.5 }}>
+          <View
+            style={{
+              width: 12,
+              height: 12,
+              borderRadius: 6,
+              backgroundColor: "#00C8FF",
+              borderWidth: 2,
+              borderColor: "white",
+              boxShadow: "0 0 8px rgba(0, 200, 255, 0.9)",
+            }}
+          />
+        </Marker>
+        <Marker coordinate={FLIGHT.to} anchor={{ x: 0.5, y: 0.5 }}>
+          <View
+            style={{
+              width: 12,
+              height: 12,
+              borderRadius: 6,
+              backgroundColor: "#00C8FF",
+              borderWidth: 2,
+              borderColor: "white",
+              boxShadow: "0 0 8px rgba(0, 200, 255, 0.9)",
+            }}
+          />
+        </Marker>
       </MapView>
     </View>
   );

@@ -19,6 +19,12 @@
       "@bacons/apple-colors"
     ],
     "name": "Flighty Globe",
-    "owner": "bacon"
+    "owner": "bacon",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9e30cdcb-503f-433a-83fd-8785be8a6512"
+      }
+    }
   }
 }

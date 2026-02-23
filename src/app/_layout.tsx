@@ -20,8 +20,9 @@ export default function Layout() {
             sheetAllowedDetents: [0.33, 0.55, 1.0],
             title: "",
             headerSearchBarOptions: {},
+            // Allow interactive map
             sheetLargestUndimmedDetentIndex: 1,
-               swipeToDismiss: false, 
+            swipeToDismiss: false, 
           }}
         >
           <Stack.Header
