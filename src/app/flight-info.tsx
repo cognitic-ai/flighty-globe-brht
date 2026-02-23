@@ -1,10 +1,12 @@
 import { View, Text, ScrollView } from "react-native";
 import { Image } from "expo-image";
 import * as AC from "@bacons/apple-colors";
-
+import { usePreventRemove } from '@react-navigation/native';
 const PROFILE_IMAGE = "https://github.com/evanbacon.png";
 
 function ProfileHeader() {
+  usePreventRemove(true, ({ data }) => {
+});
   return (
     <View
       style={{
